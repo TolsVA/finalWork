@@ -41,9 +41,10 @@ public class Main {
 
     public List<Person> bubbleSort(List<Person> persons) {
         boolean isSorted = false;
+        int size = persons.size();
         while (!isSorted) {
             isSorted = true;
-            for (int i = 1; i < persons.size(); i++) {
+            for (int i = 1; i < size; i++) {
                 if (persons.get(i).getPhones().size() > persons.get(i - 1).getPhones().size()) {
                     Person temp = persons.get(i);
                     persons.set(i, persons.get(i - 1));
@@ -51,6 +52,7 @@ public class Main {
                     isSorted = false;
                 }
             }
+            size--;
         }
         return persons;
     }
