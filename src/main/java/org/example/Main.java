@@ -7,17 +7,16 @@ public class Main {
         String lainName = "Конрад , Филипп , Шерлок , Харитон, Тимофей, Иосиф  , Устин  , Зенон  , Чарльз , Юлиан  , Шарль  , Леон   ";
         String[] arrName = lainName.split(", ");
 
-        Set<String> set = new HashSet<>();
-        Map<String, Person> mapPersons = new MyHashMap<>();
+        Map<String,Person> mapPersons = new MyHashMap<>();
 
-        org.example.Main main = new org.example.Main();
+        Main main = new Main();
 
         Random random = new Random();
         for (int i = 0; i < 20; i++) {
             String newName = main.getNewName(arrName, random);
             String newPhone = main.getNewPhone(random);
 
-            if (set.contains(newName)) {
+            if (mapPersons.containsKey(newName)) {
                 mapPersons.get(newName).setPhones(newPhone);
             } else {
                 Person person = new PersonBuilder()
@@ -25,7 +24,6 @@ public class Main {
                         .setPhone(newPhone)
                         .build();
                 mapPersons.put(person.getName(), person);
-                set.add(newName);
             }
         }
         System.out.println(mapPersons);
