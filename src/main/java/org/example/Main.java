@@ -2,12 +2,14 @@ package org.example;
 
 import java.util.*;
 
+import static java.util.Comparator.comparingInt;
+
 public class Main {
     public static void main(String[] args) {
         String lainName = "Конрад , Филипп , Шерлок , Харитон, Тимофей, Иосиф  , Устин  , Зенон  , Чарльз , Юлиан  , Шарль  , Леон   ";
         String[] arrName = lainName.split(", ");
 
-        Map<String,Person> mapPersons = new MyHashMap<>();
+        Map<String, Person> mapPersons = new MyHashMap<>();
 
         Main main = new Main();
 
@@ -28,13 +30,21 @@ public class Main {
         }
 
         System.out.println(mapPersons);
+        main.sorted(mapPersons);
         List<Person> personArrayList = new ArrayList<>(mapPersons.values());
         main.print(main.bubbleSort(personArrayList));
 
         String searchName = main.getNewName(arrName, random);
         System.out.println(
-                mapPersons.containsKey(searchName) ? mapPersons.get(searchName): searchName + " нет такого персонажа"
+                mapPersons.containsKey(searchName) ? mapPersons.get(searchName) : searchName + " нет такого персонажа"
         );
+    }
+
+    private void sorted(Map<String, Person> mapPersons) {
+        List<Person> collect = mapPersons.values().stream()
+                .sorted(comparingInt(e -> -e.getPhones().size()))
+                .toList();
+        collect.forEach(it -> System.out.println("\t" + it));
     }
 
     private void print(List<Person> persons) {
@@ -51,7 +61,7 @@ public class Main {
         while (!isSorted) {
             isSorted = true;
             for (int i = 1; i < size; i++) {
-                if (persons.get(i).getPhones().size() > persons.get(i - 1).getPhones().size()) {
+                if (persons.get(i).getPhones().size() < persons.get(i - 1).getPhones().size()) {
                     Person temp = persons.get(i);
                     persons.set(i, persons.get(i - 1));
                     persons.set(i - 1, temp);
