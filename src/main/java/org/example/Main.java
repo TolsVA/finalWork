@@ -26,9 +26,15 @@ public class Main {
                 mapPersons.put(person.getName(), person);
             }
         }
+
         System.out.println(mapPersons);
         List<Person> personArrayList = new ArrayList<>(mapPersons.values());
         main.print(main.bubbleSort(personArrayList));
+
+        String searchName = main.getNewName(arrName, random);
+        System.out.println(
+                mapPersons.containsKey(searchName) ? mapPersons.get(searchName): searchName + " нет такого персонажа"
+        );
     }
 
     private void print(List<Person> persons) {
