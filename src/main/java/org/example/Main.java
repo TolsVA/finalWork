@@ -21,7 +21,7 @@ public class Main {
             if (mapPersons.containsKey(newName)) {
                 mapPersons.get(newName).setPhones(newPhone);
             } else {
-                Person person = new PersonBuilder()
+                Person person = new Person.Builder()
                         .setName(newName)
                         .setPhone(newPhone)
                         .build();
